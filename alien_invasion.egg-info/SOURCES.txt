@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+alien_invasion.egg-info/PKG-INFO
+alien_invasion.egg-info/SOURCES.txt
+alien_invasion.egg-info/dependency_links.txt
+alien_invasion.egg-info/requires.txt
+alien_invasion.egg-info/top_level.txt

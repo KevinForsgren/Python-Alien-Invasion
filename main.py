@@ -47,7 +47,8 @@ class AlienInvasion:
         # Make the Play button and menu screen.
         self.play_button = Button(self, "PLAY")
         self.menu = Menu(self)
-
+        # Theta value and scoreboard border
+        self.theta = 0
 
     def run_game(self):
         '''Start the main loop for the game.'''
@@ -59,7 +60,10 @@ class AlienInvasion:
                 self._update_bullets()
                 self._update_aliens()
 
-            self.update_screen()           
+            self.update_screen()
+            self.theta += 0.1
+            if self.theta == 361:
+                self.theta = 0          
             self.clock.tick(60)
 
 

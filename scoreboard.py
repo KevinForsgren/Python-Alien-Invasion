@@ -15,13 +15,15 @@ class Scoreboard:
         self.stats = ai_game.stats
 
         # Board image
-        self.board_img = pygame.image.load("Assets\scoreboard.png")
+        self.board_img_1 = pygame.image.load(self.settings.scoreboard_1)
+        self.board_img_2 = pygame.image.load(self.settings.scoreboard_2)
 
         # Font settings for scoring information
         self.text_color = (30, 30, 30)
         self.font = pygame.font.SysFont(None, 48, italic = True)
 
         # Prepare the initial score image.
+        self.sin_wave()
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
@@ -35,8 +37,7 @@ class Scoreboard:
 
         # Display the score at the top right of the screen
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.right = self.screen_rect.right - 50
-        self.score_rect.top = 20
+        self.score_rect.center = self.score_board_img_rect.center
 
     def show_score(self):
         '''Draw score to the screen.'''
@@ -44,28 +45,18 @@ class Scoreboard:
 
         # Display of score and its animation using sin-wave
         self.score_x = self.score_rect[0]
-        self.score_y = self.score_rect[1]  
-        self.board_img_rect = self.board_img.get_rect()
-        self.board_img_rect.center = self.score_rect.center
-
-        self.screen.blit(self.board_img, [self.board_img_rect[0], self.board_img_rect[1] + self.sin_y])
+        self.score_y = self.score_rect[1]
         self.screen.blit(self.score_image, [self.score_x, self.score_y + self.sin_y])
-        # print(self.board_img_rect.center)
 
         # Display of High_score and its animation using sin-wave
         self.high_score_x = self.high_score_rect[0]
-        self.high_score_y = self.high_score_rect[1]
-        self.board_img_rect.center = self.high_score_rect.center
-
-        self.screen.blit(self.board_img, [self.board_img_rect[0], self.board_img_rect[1] + self.sin_y])
-        self.screen.blit(self.high_score_image, [self.high_score_x, self.high_score_y + self.sin_y])
-        # print(self.board_img_rect.center)
+        self.high_score_y = self.high_score_rect[1] + self.sin_y
+        self.screen.blit(self.high_score_image, [self.high_score_x, self.high_score_y])
 
         # Display of level and its animation using sin-wave
         self.level_x = self.level_rect[0]
-        self.level_y = self.level_rect[1]
-        self.screen.blit(self.level_image, [self.level_x, self.level_y + self.sin_y])
-
+        self.level_y = self.level_rect[1] + self.sin_y
+        self.screen.blit(self.level_image, [self.level_x, self.level_y ])
 
         self.ships.draw(self.screen)
 
@@ -83,8 +74,7 @@ class Scoreboard:
             
         # Center the high score at the top of the screen.
         self.high_score_rect = self.high_score_image.get_rect()
-        self.high_score_rect.centerx = self.screen_rect.centerx
-        self.high_score_rect.top = self.score_rect.top
+        self.high_score_rect.center = self.board_img_rect.center
 
     def check_high__score(self):
         '''Check to see if there's a new high score.'''
@@ -96,27 +86,53 @@ class Scoreboard:
         '''Turn the level into a rendered image.'''
         level_str = str(self.stats.level)
         self.level_image = self.font.render(
-            level_str, True, self.text_color, self.settings.bg_color
+            level_str, True, self.text_color, (255, 255, 255)
             )
         
         # Position the level below the score.
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.right = self.score_rect.right
-        self.level_rect.top = self.score_rect.bottom + 20
+        self.level_rect.center = self.lvl_board_img_rect.center
 
     def prep_ships(self):
         '''Show how many ships are left.'''
         self.ships = Group()
         for ship_number in range(self.stats.ships_left):
             ship = Ship(self.ai_game)
-            ship.rect.x = 10 + ship_number * ship.rect.width
+            ship.rect.x = 100 + ship_number * ship.rect.width
             ship.rect.y = 0
             self.ships.add(ship)
 
     def sin_wave(self):
         self.theta = self.ai_game.theta
         self.center = [0,0]
-        self.radius = 10
+        self.radius = 5
 
         self.sin_x = self.center[0] + self.radius * cos(self.theta)
         self.sin_y = self.center[1] + self.radius * sin(self.theta)
+
+        "Board for high_score"
+        self.board_img_rect = self.board_img_1.get_rect()
+        self.board_img_rect.center = self.screen_rect.center
+        self.board_img_rect.top = self.screen_rect.top + 5
+
+        self.screen.blit(self.board_img_1, [self.board_img_rect[0],
+                         self.board_img_rect[1] + self.sin_y]
+                         )
+        
+        "Board for score"
+        self.score_board_img_rect = self.board_img_1.get_rect()
+        self.score_board_img_rect.right = self.screen_rect.right
+        self.score_board_img_rect.top = self.screen_rect.top + 5
+
+        self.screen.blit(self.board_img_1, [self.score_board_img_rect[0],
+                         self.score_board_img_rect[1] + self.sin_y]
+                        )
+        
+        "Board for level"
+        self.lvl_board_img_rect = self.board_img_2.get_rect()
+        self.lvl_board_img_rect.left = self.screen_rect.left
+        self.lvl_board_img_rect.top = self.screen_rect.top + 5
+
+        self.screen.blit(self.board_img_2, [self.lvl_board_img_rect[0],
+                         self.lvl_board_img_rect[1] + self.sin_y]
+                        )

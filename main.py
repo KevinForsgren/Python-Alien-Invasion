@@ -20,21 +20,24 @@ class AlienInvasion:
         pygame.init()
         self.clock = pygame.time.Clock()
         self.settings = Settings()
-
-        self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+        self.screen = pygame.display.set_mode((0,0),
+            pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
         # Set caption and app icon.
         pygame.display.set_caption("Alien Invasion")
         self.displayicon = pygame.image.load(self.settings.icon)
         pygame.display.set_icon(self.displayicon)
-
         # Background
-        self.background = pygame.image.load("Assets/bg.bmp")
+        # self.background = pygame.image.load("Assets/bg.bmp")
+        self.background_color = (0,0,0)
 
         # Create an instance to store game statistics,
-        # and create a scoreboard
+        # and create a scoreboard and theta value for sin function
         self.stats = GameStats(self)
+        self.theta = 0
         self.sb = Scoreboard(self)
+
         # Ship
         self.ship = Ship(self)
         # Bullet
@@ -47,8 +50,7 @@ class AlienInvasion:
         # Make the Play button and menu screen.
         self.play_button = Button(self, "PLAY")
         self.menu = Menu(self)
-        # Theta value and scoreboard border
-        self.theta = 0
+        
 
     def run_game(self):
         '''Start the main loop for the game.'''
@@ -61,6 +63,7 @@ class AlienInvasion:
                 self._update_aliens()
 
             self.update_screen()
+            "Increase theta value and also reset it to 0 at 361"
             self.theta += 0.1
             if self.theta == 361:
                 self.theta = 0          

@@ -22,7 +22,8 @@ class Settings:
         # Score settings
         self.alien_points = 50
         self.score_scale = 1.5
-        self.scoreborder = "Assets/scoreboard.png"
+        self.scoreboard_1 = "Assets/scoreboard_1.png"
+        self.scoreboard_2 = "Assets/scoreboard_2.png"
 
         self.initialize_dynamic_settings()
 

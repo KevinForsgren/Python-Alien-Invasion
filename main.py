@@ -50,10 +50,18 @@ class AlienInvasion:
         # Make the Play button and menu screen.
         self.play_button = Button(self, "PLAY")
         self.menu = Menu(self)
+        # Sounds
+        self.ship_explosion = pygame.mixer.Sound(self.settings.ship_explosion)
+        self.alien_explosion = pygame.mixer.Sound(self.settings.alien_explosion)
+        self.laser_shoot = pygame.mixer.Sound(self.settings.laser)
+        self.empty_laser = pygame.mixer.Sound(self.settings.no_laser)
+        self.select = pygame.mixer.Sound(self.settings.select)
+        self.bg_music = pygame.mixer.music.load(self.settings.bg_music)
         
 
     def run_game(self):
         '''Start the main loop for the game.'''
+        pygame.mixer.music.play(-1, 0.0)
         while True:
             self.check_events()
 
@@ -167,7 +175,12 @@ class AlienInvasion:
         '''Create a new bullet and add it to the bullets group.'''
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
-            self.bullets.add(new_bullet)   
+            self.bullets.add(new_bullet)
+            # Play sound for shooting alser
+            self.laser_shoot.play()
+        else:
+            # Play beep for empty laser
+            self.empty_laser.play()
 
 
     def _update_bullets(self):
@@ -196,6 +209,8 @@ class AlienInvasion:
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
             self.sb.check_high__score()
+            # Play sound when alien hit   
+            self.alien_explosion.play()
 
         if not self.aliens:
             # Destroy existing bullets and create new fleet.
@@ -210,6 +225,7 @@ class AlienInvasion:
 
     def _ship_hit(self):
         '''Respond to the ship being hit by an aliens.'''
+        
         if self.stats.ships_left > 0:
             # Decrement ship_left, and update scoreboard
             self.stats.ships_left -= 1
@@ -222,11 +238,16 @@ class AlienInvasion:
             # Create a new fleet and center the ship
             self._create_fleet()
             self.ship.center_ship()
+            # Play explosion sound when ship hit
+            self.ship_explosion.play()
 
             # Pause
             sleep(0.5)
         else:
+            # Play explosion sound when ship hit
+            self.ship_explosion.play()
             self.game_active = False
+            self.stats.ships_left = 3
             pygame.mouse.set_visible(True)
 
 
@@ -236,6 +257,8 @@ class AlienInvasion:
             if aliens.rect.bottom >= self.settings.screen_height:
                 # Treat this the same as the ship got hit
                 self._ship_hit()
+                # Play explosion sound when alien hit bottom
+                self.ship_explosion.play()
                 break
 
 
@@ -243,6 +266,8 @@ class AlienInvasion:
         '''Start a new game when the player click Play.'''
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.game_active:
+            # Play sound when button clicked
+            self.select.play()
             # Reset the game statistics.
             self.settings.initialize_dynamic_settings()
             self.sb.prep_score()

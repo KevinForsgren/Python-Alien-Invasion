@@ -14,7 +14,14 @@ class Settings:
         self.bullet_color = (0, 0, 0)
         self.bullets_allowed = 3
         # Alien settings
-        self.fleet_drop_speed = 10
+        self.fleet_drop_speed = 25
+        # Sounds file
+        self.bg_music = "Assets/bg_music.wav"
+        self.alien_explosion = "Assets/explosion.wav"
+        self.ship_explosion = "Assets/ship_explosion.wav"
+        self.laser = "Assets/laser_Shoot.wav"
+        self.no_laser = "Assets/no_laser.wav"
+        self.select = "Assets/select.wav"
 
         # How quickly the game speeds up
         self.speedup_scale = 1.1

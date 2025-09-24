@@ -1,0 +1,30 @@
+# Project Description
+
+This is a personal project based on the Alien Invasion game from the book
+Python Crash Course by Eric Matthes. I have built upon the core concept of
+the book and added a number of new feature and improvements to create a more
+comprehensive and engaging game.All code in this repository was written by me,
+following the foundational structure provided in the book
+
+# Features Added
+**1. Better Main menu :**
+A custom-built main menu allows player to start the game,game title and can exit after pressing backspace.
+
+**2. Audio Sound Effects :**
+The game now includes sound effect for various actions, such as shooting,explosion, and alien hits.
+
+**3. Animation :**
+Added animation to different UI elements using sin function.
+
+**4. New sprites :**
+All sprites for the player ship, aliens, and bullets have been replaced with custom-designed sprites using open-ai and other using photoshop.
+
+**5. Better High score management :**
+Now game store all of your high score so that it can be saved and can be shown even after closing the game.
+
+# Credits
+**Game logic :**
+Based on Python Crash Course by Eric Matthes.
+
+**Assets :**
+Majority of sprites and game assets were generated using AI tools, including Perplexity's image generation feature, as a part of the development process. While title and scoreboard were created by me in photoshop

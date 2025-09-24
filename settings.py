@@ -6,17 +6,22 @@ class Settings:
         self.screen_height = 700
         self.bg_color = (230, 230, 230)
         self.icon = "Assets/app_icon.png"
+        self.AI_logo = "Assets/AlienInvasion_logo.png"
+        self.menu_bg_color = (0, 0, 0)
+
         # Ship settings
         self.ship_limit = 3
+
         # Bullet settings
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (0, 0, 0)
         self.bullets_allowed = 3
+
         # Alien settings
         self.fleet_drop_speed = 25
+        
         # Sounds file
-        self.bg_music = "Assets/bg_music.wav"
         self.alien_explosion = "Assets/explosion.wav"
         self.ship_explosion = "Assets/ship_explosion.wav"
         self.laser = "Assets/laser_Shoot.wav"

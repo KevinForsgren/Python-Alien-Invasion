@@ -29,8 +29,7 @@ class AlienInvasion:
         self.displayicon = pygame.image.load(self.settings.icon)
         pygame.display.set_icon(self.displayicon)
         # Background
-        # self.background = pygame.image.load("Assets/bg.bmp")
-        self.background_color = (0,0,0)
+        self.ai_title = pygame.image.load(self.settings.AI_logo)
 
         # Create an instance to store game statistics,
         # and create a scoreboard and theta value for sin function
@@ -56,12 +55,10 @@ class AlienInvasion:
         self.laser_shoot = pygame.mixer.Sound(self.settings.laser)
         self.empty_laser = pygame.mixer.Sound(self.settings.no_laser)
         self.select = pygame.mixer.Sound(self.settings.select)
-        self.bg_music = pygame.mixer.music.load(self.settings.bg_music)
         
 
     def run_game(self):
         '''Start the main loop for the game.'''
-        pygame.mixer.music.play(-1, 0.0)
         while True:
             self.check_events()
 

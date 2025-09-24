@@ -13,6 +13,7 @@ class Scoreboard:
         self.screen_rect = ai_game.screen.get_rect()
         self.settings = ai_game.settings
         self.stats = ai_game.stats
+        self.text_bg = (255, 255, 255)
 
         # Board image
         self.board_img_1 = pygame.image.load(self.settings.scoreboard_1)
@@ -33,7 +34,7 @@ class Scoreboard:
         '''Turns the score into a rendered image.'''
         rounded_score = round(self.stats.score, -1)
         score_str = f"{rounded_score:,}"
-        self.score_image = self.font.render(score_str, True, self.text_color, (255,255,255))
+        self.score_image = self.font.render(score_str, True, self.text_color, (self.text_bg))
 
         # Display the score at the top right of the screen
         self.score_rect = self.score_image.get_rect()
@@ -65,7 +66,7 @@ class Scoreboard:
         high_score = round(self.stats.high_score, -1)
         high_score_str = f"{high_score:,}"
         self.high_score_image = self.font.render(
-            high_score_str, True, self.text_color, (255,255,255)
+            high_score_str, True, self.text_color, (self.text_bg)
         )
 
         # Stores high_score in score.txt
@@ -86,7 +87,7 @@ class Scoreboard:
         '''Turn the level into a rendered image.'''
         level_str = str(self.stats.level)
         self.level_image = self.font.render(
-            level_str, True, self.text_color, (255, 255, 255)
+            level_str, True, self.text_color, (self.text_bg)
             )
         
         # Position the level below the score.

@@ -16,7 +16,7 @@ class AlienInvasion:
     '''Overall class to manage game assets and behavior'''
 
     def __init__(self):
-        '''Initailize the game, and create game resource'''
+        '''Initialize the game, and create game resource'''
         pygame.init()
         self.clock = pygame.time.Clock()
         self.settings = Settings()
@@ -41,7 +41,7 @@ class AlienInvasion:
         self.ship = Ship(self)
         # Bullet
         self.bullets = pygame.sprite.Group()
-        # Aleins
+        # Aliens
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
         # Start Alien Invasion in an active state.

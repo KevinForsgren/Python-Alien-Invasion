@@ -7,7 +7,7 @@ class Scoreboard:
     '''A Class for report scoring information.'''
     
     def __init__(self, ai_game):
-        '''Initialize scorekeeping attributes'''
+        '''Initialize scorekeeper attributes'''
         self.ai_game = ai_game
         self.screen = ai_game.screen
         self.screen_rect = ai_game.screen.get_rect()
